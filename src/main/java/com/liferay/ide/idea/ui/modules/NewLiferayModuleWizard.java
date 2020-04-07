@@ -61,11 +61,11 @@ public class NewLiferayModuleWizard extends AbstractProjectWizard {
 	protected void init(@NotNull ModulesProvider modulesProvider) {
 		myWizardContext.setModulesProvider(modulesProvider);
 
-		LiferayProjectTypeStep projectTypeStep = new LiferayProjectTypeStep(myWizardContext, this, modulesProvider);
+//		LiferayProjectTypeStep projectTypeStep = new LiferayProjectTypeStep(myWizardContext, modulesProvider);
 
-		Disposer.register(getDisposable(), projectTypeStep);
-
-		_sequence.addCommonStep(projectTypeStep);
+//		Disposer.register(getDisposable(), projectTypeStep);
+//
+//		_sequence.addCommonStep(projectTypeStep);
 
 		_sequence.addCommonFinishingStep(new LiferayProjectSettingsStep(myWizardContext), null);
 

@@ -207,6 +207,7 @@
 	<extensions defaultExtensionNs="com.intellij">
 		<backgroundPostStartupActivity implementation="com.liferay.ide.idea.core.LiferayPostStartupActivity"/>
 		<projectTemplatesFactory implementation="com.liferay.ide.idea.ui.modules.LiferayWorkspaceTemplatesFactory"/>
+		<moduleType id="LiferayModule" implementationClass="com.liferay.ide.idea.ui.modules.LiferayModuleType"/>
 		<configurationType implementation="com.liferay.ide.idea.server.LiferayServerConfigurationType"/>
 		<programRunner id="Run" implementation="com.liferay.ide.idea.server.LiferayServerRunner"/>
 		<programRunner id="Debug" implementation="com.liferay.ide.idea.server.LiferayServerDebuggerRunner"/>

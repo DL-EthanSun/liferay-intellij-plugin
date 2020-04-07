@@ -57,7 +57,7 @@ public class LiferayModuleBuilder extends ModuleBuilder implements LiferayWorksp
 	}
 
 	public ModuleWizardStep getCustomOptionsStep(WizardContext context, Disposable parentDisposable) {
-		return new LiferayModuleWizardStep(this, context.getProject());
+		return new LiferayProjectTypeStep(context);
 	}
 
 	@Override
