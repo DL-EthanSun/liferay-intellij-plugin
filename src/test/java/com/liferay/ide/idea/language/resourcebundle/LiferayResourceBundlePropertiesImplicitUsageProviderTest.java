@@ -14,6 +14,10 @@
 
 package com.liferay.ide.idea.language.resourcebundle;
 
+import com.intellij.lang.properties.IProperty;
+import com.intellij.lang.properties.psi.PropertiesFile;
+import com.intellij.lang.properties.psi.Property;
+import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 
 /**
@@ -21,19 +25,28 @@ import com.intellij.testFramework.fixtures.BasePlatformTestCase;
  */
 public class LiferayResourceBundlePropertiesImplicitUsageProviderTest extends BasePlatformTestCase {
 
-	public void testImplicitUsageArbitraryPropertyInLanguageProperties() {
-		myFixture.configureByFiles("Language_unused.properties");
+	public void testImplicitUsagePropertyInLanguageProperties() {
+		PsiFile file = myFixture.configureByFile("Language.properties");
 
-		//Language.properties should show unused warning for other properties
-		myFixture.checkHighlighting();
-	}
+		assertNotNull(file);
 
-	public void testImplicitUsageJavaxPortletTitleInLanguageProperties() {
-		myFixture.configureByFiles("Language.properties");
+		PropertiesFile propertiesFile = (PropertiesFile)file;
 
-		//Language.properties should not show any unused warning,
-		//even if javax.portlet.title.my_portlet is not used explicitly
-		myFixture.checkHighlighting();
+		LiferayResourceBundlePropertiesImplicitUsageProvider provider =
+			new LiferayResourceBundlePropertiesImplicitUsageProvider();
+
+		for (IProperty property : propertiesFile.getProperties()) {
+			Property p = (Property)property;
+
+			String name = property.getName();
+
+			if (name.contains("foo")) {
+				assertFalse(name, provider.isUsed(p));
+			}
+			else {
+				assertTrue(name, provider.isUsed(p));
+			}
+		}
 	}
 
 	@Override
